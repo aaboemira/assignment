@@ -44,6 +44,11 @@ $sql="SELECT * FROM profile where profile_id=:id";
 $stmt=$pdo->prepare($sql);
 $row=$stmt->execute(array("id"=>$_GET['profile_id']));
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
+if ( $row === false ) {
+    $_SESSION['err'] = 'Bad value for id';
+    header( 'Location: index.php' ) ;
+    return;
+}
 ?>
 <!DOCTYPE html>
 <html>
